@@ -5,6 +5,11 @@ A daily planner which offers the user to keep track of the TODO items. It ensure
 and mark them as done. One can keep track of the pending and done tasks as well.
 </p>
 
+### Screenshot 1 (All Items in a Bucket)
+<img src='Screenshot 1.png'></img>
+
+### Screenshot 2 (Done Items in a Bucket)
+<img src='Screenshot 2.png'></img>
 
 <h3>Technology Stack</h3>
 <ul>
