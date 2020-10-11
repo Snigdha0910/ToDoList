@@ -1,0 +1,68 @@
+
+.todo-list-item:nth-child(odd) { 
+    background:rgb(247, 240, 240); 
+}
+
+.sidebar {
+    height: 100%;
+    width: 32%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:black;
+    overflow-x: auto;
+    padding-top: 20px;
+  } 
+
+.sidebar-form{
+     z-index: 999;
+     top:10%;
+ } 
+
+.sidebar-form-list {
+    z-index: 999;
+}
+.todo-list-item{
+    background-color: inherit;
+    margin-top:5px;
+    border-radius: 10px;
+    color:black;
+}
+
+.bucket-form-input{
+    box-sizing: border-box;
+}
+
+.list-horizontal-display > div {
+    display: inline-block;
+}
+
+.list-group-item.active,.list-group-item {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.list-group-item.active,.list-group-item:hover{
+    color:pink !important;
+    text-decoration:underline;
+ 
+}
+
+.list-group-item{
+    color:white;
+}
+
+.chip{
+    text-decoration: none !important;
+}
+
+@media only screen and (max-width: 1026px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+
+
+  
