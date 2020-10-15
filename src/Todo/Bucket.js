@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import {TextField, Button,Typography} from '@material-ui/core';
+import {TextField,Button,Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {ShoppingCart} from '@material-ui/icons';
 
@@ -26,29 +26,35 @@ const useStyles = makeStyles((theme) => ({
  
     }));
 
-function Bucket(props) {
+const Bucket = React.memo(function Bucket(props) {
     const classes = useStyles();
     const [bucketList,setbucketlist]=useState('');
     const bucketInput = useRef();
+    const [error,setError]=useState('')
     
     function handleChange(e){
-        console.log(e.target.value);
        setbucketlist(e.target.value);
     }
 
     function addToBucket(e){
-        e.preventDefault();
+        e.preventDefault(); 
         if(bucketInput.current.value.trim()!==''){
-            props.addtoBucket(bucketList);
+            if(bucketInput.current.value.trim().length > 15){
+                setError('*Maximum 15 characters allowed');
+            }
+            else{
+                setError('');
+                props.addtoBucket(bucketList);  
+            }  
             setbucketlist('');
             bucketInput.current.focus();
-        }
+        } 
         else{
+            setbucketlist('');
             bucketInput.current.focus();
         } 
     }
 
-    
   return (
     <div>
          <div className="row">
@@ -66,8 +72,9 @@ function Bucket(props) {
                                         placeholder="Add buckets"/>
                             <Button variant="contained" color="secondary" aria-label="add" className={classes.root} type='submit'>
                                 Add
-                            </Button>                   
+                            </Button>             
                         </form>
+                        <span style={{color:'red'}}>{error}</span>
                     </div>
                     <div className='container'>
                         <ShoppingCart style={{display:'inline-block'}}
@@ -81,6 +88,6 @@ function Bucket(props) {
              </div>
          </div>
   );
-}
+})
 
 export default Bucket;

@@ -7,12 +7,14 @@ import Bucket from './Todo/Bucket';
 import BucketList from './Todo/BucketList';
 import './list.css';
 
+
 function App() {
 
   const [state,setState]=useState(
     {bucket:[
-      {name: 'Checklist 1',
+      {name:'Checklist 1',
       items:[],
+      rename:false,
       }
     ],
     filter:['all'],
@@ -27,7 +29,7 @@ function App() {
   }
 
   function addItemToBucket(bucketList){
-    let bucket = {name:bucketList,items:[]};
+    let bucket = {name:bucketList,items:[],rename:false};
     let newState = JSON.parse(JSON.stringify(state));
     newState.bucket.push(bucket);
     setState(newState);
@@ -45,6 +47,14 @@ function App() {
     setState(newState);
   }
 
+  function changeEditModeinBucket(index){
+    console.log(index);
+    let newEdit = JSON.parse(JSON.stringify(state));
+    newEdit.bucket[index].rename = !newEdit.bucket[index].rename;
+    setState(newEdit);
+    console.log('rename set in state')
+  }
+  
   function changeIsDone(check, index){ 
     let newState = JSON.parse(JSON.stringify(state));
     newState.bucket[newState.selectedBucket].items[index].isComplete = check;
@@ -56,6 +66,13 @@ function App() {
     let newState = JSON.parse(JSON.stringify(state));
     newState.bucket[newState.selectedBucket].items[index].item = item;
     newState.bucket[newState.selectedBucket].items[index].isEditable=false;
+    setState(newState);
+  }
+
+  function updateBucketinState(item,index){
+    let newState = JSON.parse(JSON.stringify(state));
+    newState.bucket[index].name = item;
+    newState.bucket[index].rename=false;
     setState(newState);
   }
 
@@ -80,7 +97,9 @@ function App() {
             <Bucket addtoBucket={addItemToBucket}/>
             <BucketList bucketId ={state.selectedBucket} 
                         chooseBucket={setBucket} 
-                        bucket={state.bucket} />
+                        bucket={state.bucket} 
+                        renameBucket={changeEditModeinBucket}
+                        updateBucketinState={updateBucketinState}/>
           </div>   
         </div>
         <div className='col-lg-8'>
